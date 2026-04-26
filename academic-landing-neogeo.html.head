@@ -1551,7 +1551,7 @@
           <div class="thesis-frame" style="grid-template-columns: 1fr;">
             <div class="thesis-text" style="border-right: none;">
               <div class="working">— working title —</div>
-              <h3><span class="open">"</span>[Your dissertation title, written the way you would actually say it aloud to a curious stranger]<span class="close">"</span></h3>
+              <h3><span class="open">"</span>Understanding the Epigenetic Dynamics of Aging through Modeling and Machine Learning<span class="close">"</span></h3>
               <p>[First paragraph. The animating question — what puzzle, gap, or contradiction got you here. Plain language is the highest compliment a reader can be paid.]</p>
               <p>[Second paragraph. The approach — methods, archives, fieldwork, models, or texts you are working with. What kind of evidence will count for you, and why.]</p>
               <p>[Third paragraph. What you hope to know by the end of it that you do not know yet, and what (if anything) might shift in the wider conversation if you are right.]</p>
