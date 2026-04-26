@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EpiFlow — flow model of the vector space of aging — Niel Vanhamel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project-shared.css">
+</head>
+<body>
+
+<nav class="proj-nav">
+  <a href="index.html">← back · n. vanhamel · the epylisian genome</a>
+  <span>project · II of IV</span>
+</nav>
+
+<main class="proj">
+
+  <header class="proj-head">
+    <div class="kicker">PROJECT · II — FIG. P2</div>
+    <h1>EpiFlow: a <em>flow model</em> of the vector space of aging.</h1>
+    <div class="subtitle">If the methylome is a manifold, what does the velocity field on it look like — and where do trajectories actually tip?</div>
+  </header>
+
+  <div class="proj-fig">
+    <div class="fig-header">
+      <span>FIG. P2 · DRAFT · A</span>
+      <span>EPIGENETIC VELOCITY FIELD · LIVE</span>
+    </div>
+    <canvas id="draft-a"></canvas>
+    <div class="fig-readout" id="readout-a">field initialising…</div>
+  </div>
+
+  <article class="proj-prose">
+    <div class="abstract-label">— abstract —</div>
+    <p>An epigenetic clock collapses an enormous amount of information — hundreds of thousands of CpG sites, each with its own slow story — into a single scalar prediction of biological age. That is useful, and it is also lossy. Two bodies can land at the same predicted age while standing in completely different places on the methylation manifold, heading in completely different directions, exposed to completely different next steps. EpiFlow takes the alternative seriously. Rather than asking <em>how old is this sample</em>, it asks <em>where on the manifold is this sample, and which way is it moving</em>. The aging signal becomes a vector field, not a regression line — a velocity at every point, pointing wherever time is dragging this particular body next.</p>
+    <p>The technical approach borrows from continuous normalising flows and from flow matching. Given a longitudinal cohort with paired methylomes from the same individuals across time, the model learns the time-derivative of the methylation state at each point, conditioned on the body's phenotypic context — sex, BMI, smoking, comorbidities. The integral curves of that field are individual aging trajectories, and the points where the field bifurcates are where small environmental shifts split otherwise similar bodies into divergent fates: the places where intervention is plausible. The figure above is one two-dimensional slice of the field; real EpiFlow lives in tens of thousands of dimensions, and the slice is a viewport into something much larger.</p>
+    <div class="closer">stack · pytorch · torchdiffeq · custom flow-matching loss &nbsp;|&nbsp; cohorts · GEO longitudinal sets &nbsp;|&nbsp; first goal · proof-of-principle on whole blood</div>
+  </article>
+
+</main>
+
+<footer class="proj-foot">
+  <div>© MMXXVI Niel Vanhamel · Ghent University</div>
+  <div>FIG. P2 · last revised APR · MMXXVI</div>
+</footer>
+
+<script src="project-shared.js"></script>
+<script src="iife_a.js"></script>
+</body>
+</html>

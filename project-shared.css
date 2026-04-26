@@ -1,0 +1,229 @@
+:root {
+  --paper:       #EFE4C8;
+  --paper-deep:  #E5D9B5;
+  --paper-soft:  #F5ECCE;
+  --ink:         #1A1612;
+  --ink-soft:    #443B30;
+  --ink-faint:   #8A7E6B;
+  --rule:        rgba(26, 22, 18, 0.14);
+  --rule-strong: rgba(26, 22, 18, 0.28);
+  --gold:        #BE9748;
+  --emerald:     #1E4D3E;
+  --burgundy:    #6E1F22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+
+a { color: var(--ink); }
+a:hover { color: var(--burgundy); }
+
+/* nav */
+nav.proj-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(239, 228, 200, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--rule);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+nav.proj-nav a { text-decoration: none; color: var(--ink-soft); }
+nav.proj-nav a:hover { color: var(--burgundy); }
+
+/* layout */
+main.proj {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 80px 32px 120px;
+}
+
+header.proj-head {
+  margin-bottom: 56px;
+  border-top: 1px solid var(--rule);
+  padding-top: 40px;
+}
+.kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+header.proj-head h1 {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  margin-bottom: 18px;
+  color: var(--ink);
+  max-width: 22ch;
+}
+header.proj-head h1 em {
+  color: var(--burgundy);
+  font-style: italic;
+}
+.subtitle {
+  font-size: 18px;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  font-style: italic;
+  font-family: 'Instrument Serif', serif;
+}
+
+/* fig — narrower / shorter than the original "hero" placement so it
+   reads as a study figure inside the prose, not as the page hero */
+.proj-fig {
+  position: relative;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-soft);
+  height: 440px;
+  max-width: 760px;
+  margin: 48px auto;
+  overflow: hidden;
+}
+/* full-width variant for the OMIM pipeline figure — three-phase
+   layout needs the full width to actually breathe */
+.proj-fig.proj-fig-wide {
+  max-width: none;
+  margin: 48px 0;
+  height: 540px;
+}
+.proj-fig canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.proj-fig .fig-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 2;
+}
+.proj-fig .fig-readout {
+  position: absolute;
+  bottom: 8px;
+  left: 14px;
+  right: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* placeholder used on pages where no representative animation exists yet */
+.proj-fig-placeholder {
+  margin: 48px auto;
+  max-width: 760px;
+  text-align: center;
+  color: var(--ink-faint);
+}
+.proj-fig-placeholder .ph-rule {
+  border-top: 1px solid var(--rule);
+  height: 0;
+  margin: 12px 0;
+}
+.proj-fig-placeholder .ph-text {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 24px 0;
+}
+
+/* prose — abstract style: single-column flowing text, generous leading,
+   no per-section labels. Reads as one continuous paragraph block. */
+article.proj-prose {
+  max-width: 720px;
+  margin: 32px auto 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 28px;
+}
+article.proj-prose .abstract-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+article.proj-prose p {
+  font-size: 16.5px;
+  line-height: 1.72;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+article.proj-prose p:first-of-type::first-letter {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 2.4em;
+  line-height: 0.9;
+  float: left;
+  margin: 4px 8px -2px 0;
+  color: var(--burgundy);
+}
+article.proj-prose p em {
+  color: var(--ink);
+  font-style: italic;
+  font-family: 'Instrument Serif', serif;
+}
+article.proj-prose .closer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  margin-top: 28px;
+}
+
+/* footer */
+footer.proj-foot {
+  border-top: 1px solid var(--rule);
+  padding: 32px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  article.proj-prose { padding: 20px 16px 0; }
+  .proj-fig { height: 360px; }
+  .proj-fig.proj-fig-wide { height: 460px; }
+}

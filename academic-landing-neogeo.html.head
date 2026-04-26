@@ -1,0 +1,1986 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[Your Full Name] — PhD Candidate, [Your Field]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:       #EFE4C8;
+    --paper-deep:  #E5D9B5;
+    --paper-soft:  #F5ECCE;
+    --ink:         #1A1612;
+    --ink-soft:    #443B30;
+    --ink-faint:   #8A7E6B;
+    --rule:        rgba(26, 22, 18, 0.14);
+    --rule-strong: rgba(26, 22, 18, 0.28);
+    --gold:        #BE9748;
+    --emerald:     #1E4D3E;
+    --burgundy:    #6E1F22;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle, rgba(26, 22, 18, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: 0 0;
+  }
+
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .ital { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; }
+
+  a { color: inherit; text-decoration: none; transition: color 500ms cubic-bezier(.2,.7,.2,1); }
+  a:hover { color: var(--burgundy); }
+
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 64px;
+    position: relative;
+  }
+  @media (max-width: 720px) { .wrap { padding: 0 24px; } }
+
+  /* ---------- 12-column scaffold ---------- */
+  .grid12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .grid12 { grid-template-columns: 1fr; } }
+
+  /* ---------- Page lattice (visible vertical rules) ---------- */
+  .lattice {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .lattice .col {
+    border-right: 1px dashed var(--rule);
+    height: 100%;
+  }
+  .lattice .col:last-child { border-right: none; }
+  @media (max-width: 900px) { .lattice { display: none; } }
+
+  /* ---------- NAV ---------- */
+  nav.top {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 18px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    background: linear-gradient(to bottom, var(--paper) 70%, rgba(239, 228, 200, 0));
+    border-bottom: 1px solid transparent;
+    font-size: 12px;
+  }
+  nav.top .left, nav.top .right {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+  nav.top .right { text-align: right; }
+  nav.top .center {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-soft);
+  }
+  nav.top .center a:hover { color: var(--gold); }
+  nav.top .mark {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 720px) {
+    nav.top { padding: 14px 24px; grid-template-columns: 1fr 1fr; }
+    nav.top .center { display: none; }
+  }
+
+  section { padding: 140px 0; position: relative; }
+  @media (max-width: 720px) { section { padding: 88px 0; } }
+
+  /* ---------- SECTION HEAD ---------- */
+  .section-head {
+    grid-column: 1 / 13;
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    gap: 24px;
+    margin-bottom: 80px;
+    align-items: end;
+    border-top: 1px solid var(--rule-strong);
+    padding-top: 24px;
+  }
+  .section-head .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+  }
+  .section-head .num .of { color: var(--ink-faint); }
+  .section-head h2 {
+    font-weight: 500;
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    max-width: 24ch;
+  }
+  .section-head h2 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--emerald); }
+  .section-head .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-align: right;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+  @media (max-width: 720px) {
+    .section-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 48px; }
+    .section-head .meta { text-align: left; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+    padding: 120px 0 60px;
+    position: relative;
+  }
+  .hero .wrap { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; align-items: end; width: 100%; }
+  .hero .label-tl, .hero .label-tr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    position: absolute;
+    top: 96px;
+  }
+  .hero .label-tl { left: 64px; }
+  .hero .label-tr { right: 64px; text-align: right; }
+  .hero .label-tl .dot, .hero .label-tr .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-right: 8px;
+    transform: translateY(-1px);
+  }
+
+  .hero-text { grid-column: 1 / 8; }
+  .hero-canvas-wrap {
+    grid-column: 8 / 13;
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--rule-strong);
+    background: var(--paper-soft);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-canvas-wrap::before, .hero-canvas-wrap::after {
+    content: '';
+    position: absolute;
+    background: var(--rule);
+  }
+  .hero-canvas-wrap::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+  .hero-canvas-wrap::after  { top: 50%; left: 0; right: 0; height: 1px; }
+  #lissajous {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-canvas-wrap .corner-label {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    padding: 8px 10px;
+    letter-spacing: 0.06em;
+  }
+  .hero-canvas-wrap .corner-label.tl { top: 0; left: 0; }
+  .hero-canvas-wrap .corner-label.tr { top: 0; right: 0; }
+  .hero-canvas-wrap .corner-label.bl { bottom: 0; left: 0; }
+  .hero-canvas-wrap .corner-label.br { bottom: 0; right: 0; }
+  .hero-canvas-wrap .figure-tag {
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    background: var(--paper);
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    border: 1px solid var(--rule-strong);
+    border-top: none;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 6.4vw, 92px);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
+    max-width: 14ch;
+  }
+  .hero h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--emerald);
+    letter-spacing: -0.01em;
+  }
+  .hero .role-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 14px;
+  }
+  .hero .role-line .key { color: var(--gold); }
+  .hero .lede {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin-bottom: 40px;
+    line-height: 1.65;
+  }
+  .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 14px 22px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    transition: all 500ms cubic-bezier(.2,.7,.2,1);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+  .btn .arrow { transition: transform 500ms cubic-bezier(.2,.7,.2,1); }
+  .btn:hover { background: var(--burgundy); border-color: var(--burgundy); color: var(--paper); }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+
+  @media (max-width: 900px) {
+    .hero-text { grid-column: 1 / 13; }
+    .hero-canvas-wrap { grid-column: 1 / 13; aspect-ratio: 4/3; margin-top: 40px; }
+    .hero .label-tl, .hero .label-tr { display: none; }
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-body { grid-column: 2 / 9; }
+  .about-aside { grid-column: 9 / 13; }
+  .about-body p {
+    font-size: 17px;
+    margin-bottom: 18px;
+    color: var(--ink);
+    max-width: 56ch;
+  }
+  .about-body p .ital { color: var(--emerald); }
+  .about-aside {
+    border-top: 1px solid var(--ink);
+    padding-top: 16px;
+  }
+  .about-aside .row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 13px;
+    align-items: baseline;
+  }
+  .about-aside .row .k {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .about-aside .row .v { color: var(--ink); font-size: 14px; }
+  @media (max-width: 900px) {
+    .about-body, .about-aside { grid-column: 1 / 13; }
+    .about-aside { margin-top: 32px; }
+  }
+
+  /* ---------- DISSERTATION (with live phyllotaxis specimen) ---------- */
+  .thesis-block { grid-column: 1 / 13; }
+  .thesis-frame {
+    border: 1px solid var(--ink);
+    background: var(--paper-soft);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    position: relative;
+  }
+  .thesis-frame::before {
+    content: 'FIG. 02 — DISSERTATION';
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 6px 14px;
+    letter-spacing: 0.1em;
+  }
+  .thesis-text { padding: 64px 56px 48px; border-right: 1px solid var(--rule-strong); }
+  .thesis-text .working {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .thesis-text h3 {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.2;
+    margin-bottom: 28px;
+    color: var(--ink);
+    max-width: 28ch;
+  }
+  .thesis-text h3 .open, .thesis-text h3 .close { color: var(--gold); font-style: normal; font-family: 'Inter', sans-serif; }
+  .thesis-text p {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: 14px;
+  }
+  .thesis-text .axes {
+    margin-top: 28px;
+    border-top: 1px solid var(--rule-strong);
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .thesis-text .axes > div {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+  .thesis-text .axes .k { color: var(--gold); display: block; margin-bottom: 4px; letter-spacing: 0.06em; }
+  .thesis-text .axes .v { color: var(--ink); font-family: 'Inter', sans-serif; font-size: 13px; }
+
+  .thesis-spec { padding: 36px 36px 28px; display: flex; flex-direction: column; }
+  .thesis-spec .spec-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+  }
+  .thesis-spec .canvas-frame {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--rule-strong);
+    background: var(--paper);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  #phyllotaxis { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .thesis-spec .controls {
+    display: grid;
+    gap: 12px;
+  }
+  .thesis-spec .control-row {
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    gap: 12px;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .thesis-spec .control-row .label-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  .thesis-spec .control-row .label-row .label { color: var(--ink); }
+  .thesis-spec .control-row .label-row .readout { color: var(--gold); }
+  .thesis-spec input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 1px;
+    background: var(--ink);
+    grid-column: 1 / 3;
+    cursor: pointer;
+  }
+  .thesis-spec input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    background: var(--burgundy);
+    border-radius: 50%;
+    cursor: grab;
+    transition: transform 200ms ease;
+  }
+  .thesis-spec input[type=range]::-webkit-slider-thumb:active { transform: scale(1.2); cursor: grabbing; }
+  .thesis-spec input[type=range]::-moz-range-thumb {
+    width: 14px; height: 14px;
+    background: var(--burgundy);
+    border-radius: 50%;
+    border: none;
+    cursor: grab;
+  }
+  .thesis-spec .reset {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    background: transparent;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink-soft);
+    padding: 6px 10px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 300ms ease;
+    width: fit-content;
+  }
+  .thesis-spec .reset:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  @media (max-width: 900px) {
+    .thesis-frame { grid-template-columns: 1fr; }
+    .thesis-text { padding: 56px 28px 32px; border-right: none; border-bottom: 1px solid var(--rule-strong); }
+    .thesis-spec { padding: 28px; }
+  }
+
+  /* ---------- THREADS (with mini specimens) ---------- */
+  .threads { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid var(--rule-strong); }
+  .thread {
+    padding: 40px 36px;
+    border-right: 1px solid var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    gap: 24px;
+    transition: background 600ms cubic-bezier(.2,.7,.2,1);
+    position: relative;
+  }
+  .thread:nth-child(2n) { border-right: none; }
+  .thread:nth-last-child(-n+2) { border-bottom: none; }
+  .thread:hover { background: rgba(190, 151, 72, 0.06); }
+  .thread .roman {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .thread h3 {
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    max-width: 22ch;
+    letter-spacing: -0.01em;
+  }
+  .thread h3 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--burgundy); }
+  .thread p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    max-width: 38ch;
+    line-height: 1.6;
+  }
+  .thread .keys {
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .thread .specimen {
+    width: 100px;
+    height: 100px;
+    border: 1px solid var(--rule-strong);
+    background: var(--paper-soft);
+    position: relative;
+    overflow: hidden;
+    align-self: start;
+  }
+  .thread .specimen canvas { width: 100%; height: 100%; display: block; }
+  @media (max-width: 720px) {
+    .threads { grid-template-columns: 1fr; }
+    .thread { border-right: none; }
+    .thread:not(:last-child) { border-bottom: 1px solid var(--rule-strong); }
+  }
+
+  /* ---------- TALKS ---------- */
+  .talks { grid-column: 1 / 10; }
+  .talks-list { border-top: 1px solid var(--ink); }
+  .talk {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    gap: 28px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    font-size: 15px;
+    transition: padding 500ms cubic-bezier(.2,.7,.2,1);
+    position: relative;
+  }
+  .talk::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--gold);
+    transition: width 500ms cubic-bezier(.2,.7,.2,1);
+  }
+  .talk:hover { padding-left: 18px; }
+  .talk:hover::before { width: 3px; }
+  .talk .when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+  .talk .what em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+  .talk .what .kind {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border: 1px solid var(--ink);
+    margin-right: 12px;
+    color: var(--ink);
+  }
+  .talk .what .kind.poster { color: var(--burgundy); border-color: var(--burgundy); }
+  .talk .what .kind.invited { color: var(--emerald); border-color: var(--emerald); }
+  .talk .where {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-align: right;
+  }
+
+  .stats { grid-column: 10 / 13; }
+  .stats .stats-frame {
+    border: 1px solid var(--rule-strong);
+    background: var(--paper-soft);
+    padding: 24px;
+    position: sticky;
+    top: 100px;
+  }
+  .stats h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .stats .stat {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .stats .stat:last-child { border-bottom: none; }
+  .stats .stat .lab { font-size: 12px; color: var(--ink-soft); }
+  .stats .stat .num {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  @media (max-width: 900px) {
+    .talks, .stats { grid-column: 1 / 13; }
+    .stats { margin-top: 32px; }
+    .stats .stats-frame { position: relative; top: 0; }
+    .talk { grid-template-columns: 90px 1fr; gap: 14px; }
+    .talk .where { grid-column: 2; text-align: left; }
+  }
+
+  /* ---------- LEDGER ---------- */
+  .ledger-block { grid-column: 1 / 13; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  .ledger {
+    border: 1px solid var(--rule-strong);
+    padding: 32px;
+    background: var(--paper-soft);
+    position: relative;
+  }
+  .ledger .tag {
+    position: absolute;
+    top: -1px; left: -1px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 6px 12px;
+    letter-spacing: 0.08em;
+  }
+  .ledger h4 {
+    margin-top: 28px;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .ledger .sub {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .ledger ul { list-style: none; }
+  .ledger li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 14px;
+    font-size: 14px;
+    align-items: baseline;
+  }
+  .ledger li:last-child { border-bottom: none; }
+  .ledger li .marker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ledger li em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--ink); }
+  @media (max-width: 720px) { .ledger-block { grid-template-columns: 1fr; } }
+
+  /* ---------- CLOSING ---------- */
+  .closing { grid-column: 1 / 13; padding-top: 80px; padding-bottom: 80px; text-align: left; }
+  .closing-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: end; }
+  .closing .pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .closing h2 {
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
+    max-width: 16ch;
+  }
+  .closing h2 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--emerald); letter-spacing: -0.01em; }
+  .closing .invite {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: 36px;
+  }
+  .channels {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--ink);
+  }
+  .channels a {
+    display: grid;
+    grid-template-columns: 110px 1fr 24px;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    transition: padding 500ms cubic-bezier(.2,.7,.2,1);
+    position: relative;
+  }
+  .channels a::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--gold);
+    transition: width 500ms cubic-bezier(.2,.7,.2,1);
+  }
+  .channels a:hover { padding-left: 14px; }
+  .channels a:hover::before { width: 3px; }
+  .channels .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .channels .v {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink);
+  }
+  .channels .arr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-align: right;
+    transition: transform 500ms cubic-bezier(.2,.7,.2,1);
+  }
+  .channels a:hover .arr { transform: translateX(4px); color: var(--gold); }
+  @media (max-width: 900px) {
+    .closing-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  footer.foot {
+    padding: 32px 64px 56px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 720px) { footer.foot { padding: 28px 24px 48px; } }
+
+  /* ---------- WADDINGTON EPIGENETIC LANDSCAPE (FIG. 02·a) ---------- */
+  .waddington-block { grid-column: 1 / 13; margin-top: 40px; }
+  .waddington-head {
+    border-top: 1px solid var(--ink);
+    padding: 28px 0 22px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: end;
+    margin-bottom: 0;
+  }
+  .waddington-head .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .waddington-head h3 {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.2;
+    color: var(--ink);
+    max-width: 36ch;
+  }
+  .waddington-head .head-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    text-align: right;
+  }
+  .waddington-head .head-meta .acc { color: var(--gold); }
+  .waddington-intro {
+    border-top: 1px solid var(--rule);
+    padding: 16px 0 24px;
+    color: var(--ink-soft);
+    font-size: 14px;
+    max-width: 72ch;
+  }
+  .waddington-intro .citation {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  .waddington-game {
+    border: 1px solid var(--ink);
+    background: var(--paper-soft);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    position: relative;
+  }
+  .waddington-game::before {
+    content: 'FIG. 02·a — WADDINGTON LANDSCAPE · INTERACTIVE';
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 6px 14px;
+    letter-spacing: 0.1em;
+    z-index: 4;
+  }
+
+  /* Map row */
+  .landscape-stage {
+    position: relative;
+    border-bottom: 1px solid var(--rule-strong);
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .landscape-canvas-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    overflow: hidden;
+  }
+  #waddington-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    display: block;
+  }
+  .hud-bar {
+    position: absolute;
+    top: 32px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .hud-cell {
+    background: rgba(239, 228, 200, 0.92);
+    border: 1px solid var(--ink);
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .hud-cell .num {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--burgundy);
+    display: block;
+    line-height: 1;
+    margin-top: 2px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .hud-cell .vbar {
+    width: 120px;
+    height: 4px;
+    background: rgba(26, 22, 18, 0.18);
+    margin-top: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hud-cell .vbar > span {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: var(--emerald);
+    transition: width 220ms ease, background 400ms ease;
+  }
+  .hud-cell .zone {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    display: block;
+    margin-top: 2px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* Mini 3D inset */
+  .mini3d {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    width: 184px;
+    height: 124px;
+    background: rgba(239, 228, 200, 0.92);
+    border: 1px solid var(--ink);
+    padding: 6px 8px 8px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .mini3d .mini-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .mini3d canvas { display: block; width: 100%; height: 90px; }
+
+  /* Overlays (start / end) */
+  .stage-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(239, 228, 200, 0.96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+    z-index: 5;
+    transition: opacity 500ms ease;
+  }
+  .stage-overlay.hidden { opacity: 0; pointer-events: none; }
+  .stage-overlay .ov-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .stage-overlay .ov-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+    color: var(--ink);
+    max-width: 22ch;
+    margin-bottom: 16px;
+  }
+  .stage-overlay .ov-sub {
+    color: var(--ink-soft);
+    font-size: 14px;
+    max-width: 52ch;
+    margin-bottom: 22px;
+  }
+  .stage-overlay .ov-cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: all 300ms ease;
+  }
+  .stage-overlay .ov-cta:hover { background: var(--burgundy); border-color: var(--burgundy); }
+  .stage-overlay .ov-secondary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    margin-top: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-decoration: underline;
+  }
+
+  /* End-of-life summary */
+  .end-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 720px; width: 100%; align-items: center; }
+  .end-summary .age-block { text-align: left; border-right: 1px solid var(--rule-strong); padding-right: 24px; }
+  .end-summary .age-block .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .end-summary .age-block .age-val {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(72px, 9vw, 112px);
+    line-height: 1;
+    color: var(--ink);
+    margin: 6px 0 8px;
+  }
+  .end-summary .age-block .cause {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--burgundy);
+  }
+  .end-summary .conditions-block {
+    text-align: left;
+  }
+  .end-summary .conditions-block .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .conditions-list { display: flex; flex-direction: column; gap: 6px; }
+  .condition-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 12px;
+    border: 1px solid var(--rule-strong);
+    background: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .condition-tag .at {
+    color: var(--ink-faint);
+    font-size: 10px;
+  }
+  .condition-tag.severe { border-color: var(--burgundy); }
+  .condition-tag.severe .name { color: var(--burgundy); }
+  .condition-tag.mild { border-color: var(--gold); }
+  .condition-tag.healthy { border-color: var(--emerald); }
+  .condition-tag.healthy .name { color: var(--emerald); }
+
+  /* Controls panel (now below canvas, horizontal categories) */
+  .controls-panel {
+    padding: 24px 28px 22px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .controls-panel .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+  .controls-panel .panel-head .ctrl-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .controls-panel .panel-head .ctrl-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+  }
+  .controls-panel .panel-head .ctrl-meta .num {
+    color: var(--burgundy);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+  }
+
+  .factor-categories {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+  .factor-cat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .factor-cat .cat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    border-bottom: 1px dashed var(--rule);
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .factor-cat .cat-label .cat-mark { color: var(--gold); }
+  .factor-pill {
+    border: 1px solid var(--rule-strong);
+    background: transparent;
+    padding: 6px 8px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    text-align: left;
+    transition: all 220ms ease;
+    line-height: 1.2;
+    text-transform: lowercase;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .factor-pill:hover { border-color: var(--ink); color: var(--ink); }
+  .factor-pill.active.protective {
+    background: var(--emerald);
+    color: var(--paper);
+    border-color: var(--emerald);
+  }
+  .factor-pill.active.risk {
+    background: var(--burgundy);
+    color: var(--paper);
+    border-color: var(--burgundy);
+  }
+  .factor-pill .pill-symbol {
+    color: var(--gold);
+    font-weight: 500;
+    flex-shrink: 0;
+    width: 8px;
+    text-align: center;
+  }
+  .factor-pill.active .pill-symbol { color: var(--paper); }
+  .factor-pill .pill-name { flex: 1; min-width: 0; }
+
+  .legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .legend-row .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-row .swatch { width: 10px; height: 10px; display: inline-block; }
+  .legend-row .swatch.healthy { background: var(--emerald); }
+  .legend-row .swatch.severe  { background: var(--burgundy); }
+  .legend-row .swatch.mild    { background: var(--gold); }
+  .legend-row .swatch.marble  { background: var(--ink); border-radius: 50%; }
+  .legend-row .actions { margin-left: auto; display: flex; gap: 6px; }
+  .legend-row .actions button {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    background: transparent;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink-soft);
+    padding: 6px 12px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 240ms ease;
+  }
+  .legend-row .actions button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* Life-choice popup card (centered on canvas) */
+  .choice-card {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    width: min(560px, 92%);
+    background: rgba(247, 240, 220, 0.97);
+    border: 1px solid var(--ink);
+    box-shadow: 0 8px 0 -4px var(--ink);
+    padding: 16px 20px 18px;
+    z-index: 4;
+    transition: opacity 280ms ease, transform 280ms ease;
+  }
+  .choice-card.hidden { opacity: 0; pointer-events: none; transform: translate(-50%, 12px); }
+  .choice-card .ch-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    border-bottom: 1px dashed var(--rule);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+  .choice-card .ch-meta .ch-timer {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--burgundy);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .choice-card .ch-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 4px;
+  }
+  .choice-card .ch-flavor {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .choice-card .ch-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .choice-card .ch-options.three { grid-template-columns: 1fr 1fr 1fr; }
+  .choice-card .ch-opt {
+    border: 1px solid var(--rule-strong);
+    background: transparent;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    text-align: left;
+    line-height: 1.35;
+    text-transform: lowercase;
+    letter-spacing: 0.01em;
+    transition: all 200ms ease;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 56px;
+  }
+  .choice-card .ch-opt:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .choice-card .ch-opt:hover .ch-opt-tag { color: var(--paper); }
+  .choice-card .ch-opt .ch-opt-tag {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--burgundy);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .choice-card .ch-opt.protective .ch-opt-tag { color: var(--emerald); }
+  .choice-card .ch-opt.risk .ch-opt-tag { color: var(--burgundy); }
+
+  /* Life log (replaces the wall of toggles) */
+  .life-log {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+  .life-log .log-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+  .life-log .log-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    border-bottom: 1px dashed var(--rule);
+    padding-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .life-log .log-head .head-num {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--burgundy);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .life-log .log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    min-height: 64px;
+  }
+  .life-log .log-list .log-empty {
+    color: var(--ink-faint);
+    font-style: italic;
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .life-log .log-row {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 8px;
+    align-items: baseline;
+    padding: 3px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .life-log .log-row:last-child { border-bottom: none; }
+  .life-log .log-row .log-age {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 14px;
+    text-align: right;
+  }
+  .life-log .log-row .log-text { color: var(--ink); }
+  .life-log .log-row.protective .log-text { color: var(--emerald); }
+  .life-log .log-row.risk .log-text { color: var(--burgundy); }
+  .life-log .log-row.locked .log-text {
+    color: var(--burgundy);
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-thickness: 1px;
+  }
+
+  /* Minimap (full-world overview, top-right of canvas) */
+  .minimap {
+    position: absolute;
+    top: 32px;
+    right: 16px;
+    width: 220px;
+    height: 64px;
+    background: rgba(239, 228, 200, 0.92);
+    border: 1px solid var(--ink);
+    padding: 6px 8px 8px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .minimap .mini-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .minimap canvas { display: block; width: 100%; height: 38px; }
+
+  /* Reposition HUD: it sat across the top; with minimap top-right, push HUD to top-left only */
+  .hud-bar.left-only { right: auto; width: auto; gap: 8px; flex-direction: row; align-items: stretch; }
+
+  .waddington-foot {
+    border-top: 1px solid var(--rule);
+    padding: 14px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 14px;
+  }
+  .waddington-foot .disclaimer { max-width: 60ch; text-transform: none; letter-spacing: 0.02em; font-size: 11px; color: var(--ink-soft); }
+
+  @media (max-width: 1100px) {
+    .factor-categories { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .controls-panel { padding: 20px 16px; }
+    .factor-categories { grid-template-columns: repeat(2, 1fr); }
+    .end-summary { grid-template-columns: 1fr; gap: 18px; }
+    .end-summary .age-block { border-right: none; border-bottom: 1px solid var(--rule-strong); padding-right: 0; padding-bottom: 18px; }
+    .mini3d { width: 140px; height: 100px; }
+    .mini3d canvas { height: 70px; }
+    .minimap { width: 160px; height: 54px; }
+    .minimap canvas { height: 30px; }
+    .hud-bar { top: 28px; left: 12px; right: 12px; }
+    .hud-cell .vbar { width: 90px; }
+    .legend-row .actions { margin-left: 0; width: 100%; }
+  }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 1100ms cubic-bezier(.2,.7,.2,1), transform 1100ms cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  main, nav.top, footer.foot { position: relative; z-index: 2; }
+</style>
+</head>
+<body>
+
+<div class="lattice" aria-hidden="true">
+  <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+  <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+  <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+</div>
+
+<nav class="top">
+  <div class="left mono">[ Y.N. ] · phd candidate</div>
+  <div class="center">
+    <a href="#about">§01·about</a>
+    <a href="#thesis">§02·thesis</a>
+    <a href="#threads">§03·threads</a>
+    <a href="#talks">§04·talks</a>
+    <a href="#contact">§05·contact</a>
+  </div>
+  <div class="right mono">[city, country] · MMXXVI</div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="label-tl"><span class="dot"></span><span class="mono">FIG. 01 — LISSAJOUS, LIVE</span></div>
+    <div class="label-tr mono">SCROLL <span style="color:var(--gold)">↓</span></div>
+
+    <div class="wrap">
+      <div class="hero-text">
+        <h1 class="reveal">
+          [Your<br>Full Name],<br>
+          <em>[a one-line role,</em><br>
+          <em>e.g. modeling minds]</em>
+        </h1>
+        <div class="role-line reveal">
+          <span><span class="key">role:</span> phd candidate</span>
+          <span><span class="key">field:</span> [your field]</span>
+          <span><span class="key">year:</span> [x of y]</span>
+          <span><span class="key">at:</span> [university]</span>
+        </div>
+        <p class="lede reveal">
+          [One or two sentences in your own voice. Where you are doing your doctorate, what your dissertation is asking, and the small thing that first pulled you into the question. Plain language. No jargon.]
+        </p>
+        <div class="actions reveal">
+          <a href="#thesis" class="btn">read the thesis <span class="arrow">→</span></a>
+          <a href="#contact" class="btn ghost">say hello</a>
+        </div>
+      </div>
+
+      <div class="hero-canvas-wrap reveal">
+        <canvas id="lissajous"></canvas>
+        <div class="corner-label tl mono">x: A·sin(at+δ)</div>
+        <div class="corner-label tr mono">y: B·sin(bt)</div>
+        <div class="corner-label bl mono" id="param-readout">a:3 b:4 δ:0.00</div>
+        <div class="corner-label br mono">↳ hover</div>
+        <div class="figure-tag mono">FIG. 01 · LISSAJOUS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="grid12">
+        <div class="section-head reveal">
+          <div class="num">§ 01 / <span class="of">05</span></div>
+          <h2>An <em>introduction</em>, in a few breaths.</h2>
+          <div class="meta">
+            FIG. — biographical<br>
+            REV. [Mon. MMXXVI]
+          </div>
+        </div>
+
+        <div class="about-body reveal">
+          <p>[Opening paragraph. Where you grew up, what you studied before, how you ended up working on what you work on now. Two or three sentences — like answering "so what do you do?" at a friend's kitchen table.]</p>
+          <p>[Second paragraph. The longer arc — the question that quietly animates your doctorate, the methods you use, what you have begun to find or notice. Admitting you are still figuring it out is more honest than a tidy summary.]</p>
+          <p>[Optional third paragraph. Outside of the work — what you read, where you walk, who you collaborate with. Let the reader meet a person, not a CV.]</p>
+        </div>
+
+        <aside class="about-aside reveal">
+          <div class="row"><span class="k">programme</span><span class="v">[PhD in Field], [Department], [University]</span></div>
+          <div class="row"><span class="k">supervised</span><span class="v">[Supervisor] &amp; [Co-supervisor]</span></div>
+          <div class="row"><span class="k">year</span><span class="v">[Year X of Y · defence ≈ MMXX]</span></div>
+          <div class="row"><span class="k">funding</span><span class="v">[Fellowship / grant / programme]</span></div>
+          <div class="row"><span class="k">languages</span><span class="v">[en · fr · nl · …]</span></div>
+          <div class="row"><span class="k">based</span><span class="v">[City, Country]</span></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- THESIS -->
+  <section id="thesis">
+    <div class="wrap">
+      <div class="grid12">
+        <div class="section-head reveal">
+          <div class="num">§ 02 / <span class="of">05</span></div>
+          <h2>The dissertation, <em>in plain words</em>.</h2>
+          <div class="meta">
+            FIG. 02 — research<br>
+            STAGE [drafting]
+          </div>
+        </div>
+
+        <div class="thesis-block reveal">
+          <div class="thesis-frame" style="grid-template-columns: 1fr;">
+            <div class="thesis-text" style="border-right: none;">
+              <div class="working">— working title —</div>
+              <h3><span class="open">"</span>[Your dissertation title, written the way you would actually say it aloud to a curious stranger]<span class="close">"</span></h3>
+              <p>[First paragraph. The animating question — what puzzle, gap, or contradiction got you here. Plain language is the highest compliment a reader can be paid.]</p>
+              <p>[Second paragraph. The approach — methods, archives, fieldwork, models, or texts you are working with. What kind of evidence will count for you, and why.]</p>
+              <p>[Third paragraph. What you hope to know by the end of it that you do not know yet, and what (if anything) might shift in the wider conversation if you are right.]</p>
+              <div class="axes">
+                <div><span class="k">stage</span><span class="v">[drafting ch. 2]</span></div>
+                <div><span class="k">methods</span><span class="v">[archival · interview · computational]</span></div>
+                <div><span class="k">sources</span><span class="v">[archives · datasets · languages]</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="waddington-block reveal">
+          <div class="waddington-head">
+            <div class="kicker">FIG. 02·a — interactive specimen</div>
+            <h3>An <em>epigenetic landscape</em>, lived once.</h3>
+            <div class="head-meta">
+              <span class="acc">●</span> live simulation<br>
+              t · seconds = years × 1.4
+            </div>
+          </div>
+          <p class="waddington-intro">
+            The marble is you, at birth. The hills and valleys are not your genome — that part is fixed — but your <em>epigenome</em>: the soft, modifiable terrain through which your body finds its long shape. Toggle environmental factors on and off as you go. Click anywhere on the map to nudge. Each life takes about a minute. The point is not to win. The point is to feel how the same starting marble, gently steered, ends up in very different places.
+            <span class="citation">After C.H. Waddington, <em>The Strategy of the Genes</em> (1957) — adapted for educational use.</span>
+          </p>
+
+          <div class="waddington-game">
+            <div class="landscape-stage">
+              <div class="landscape-canvas-wrap">
+                <canvas id="waddington-canvas"></canvas>
+
+                <div class="hud-bar">
+                  <div class="hud-cell">
+                    age
+                    <span class="num" id="wad-age">0</span>
+                  </div>
+                  <div class="hud-cell">
+                    vitality
+                    <div class="vbar"><span id="wad-vbar" style="width: 100%"></span></div>
+                  </div>
+                  <div class="hud-cell" style="text-align: right;">
+                    current zone
+                    <span class="zone" id="wad-zone">— birth —</span>
+                  </div>
+                </div>
+
+                <div class="mini3d">
+                  <div class="mini-label">FIG. 02·b — local potential · 3D</div>
+                  <canvas id="waddington-mini"></canvas>
+                </div>
+
+                <div class="minimap">
+                  <div class="mini-label">FIG. 02·c — life journey · overview</div>
+                  <canvas id="waddington-minimap"></canvas>
+                </div>
+
+                <div class="stage-overlay" id="wad-start">
+                  <div class="ov-kicker">FIG. 02·a — interactive specimen</div>
+                  <div class="ov-title">A life on the landscape — begin?</div>
+                  <div class="ov-sub">A short interactive parable. The marble drifts with age; you steer it with everyday factors. Try a "healthy" run, then try a careless one. Notice what the terrain does to the same starting point.</div>
+                  <button class="ov-cta" id="wad-begin">▸ begin a life</button>
+                </div>
+
+                <div class="stage-overlay hidden" id="wad-end">
+                  <div class="ov-kicker">FIG. 02·a — life summary</div>
+                  <div class="end-summary">
+                    <div class="age-block">
+                      <span class="lbl">age at end</span>
+                      <div class="age-val" id="wad-end-age">—</div>
+                      <div class="cause" id="wad-end-cause">—</div>
+                    </div>
+                    <div class="conditions-block">
+                      <span class="lbl">conditions accumulated</span>
+                      <div class="conditions-list" id="wad-end-conditions">
+                        <!-- populated by JS -->
+                      </div>
+                    </div>
+                  </div>
+                  <button class="ov-cta" id="wad-replay" style="margin-top: 24px;">↺ live another life</button>
+                  <button class="ov-secondary" id="wad-end-close">close summary</button>
+                </div>
+
+                <div class="choice-card hidden" id="wad-choice">
+                  <div class="ch-meta">
+                    <span id="wad-choice-kicker">life event</span>
+                    <span class="ch-timer" id="wad-choice-timer">5.0s</span>
+                  </div>
+                  <div class="ch-title" id="wad-choice-title">…</div>
+                  <div class="ch-flavor" id="wad-choice-flavor">…</div>
+                  <div class="ch-options" id="wad-choice-options">
+                    <!-- populated by JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="controls-panel">
+              <div class="panel-head">
+                <span class="ctrl-head">a life as it unfolds — choices arrive on their own</span>
+                <span class="ctrl-meta">the relief drives the marble · choices reshape the relief · <span class="num" id="wad-active-count">0</span> standing factors</span>
+              </div>
+
+              <div class="life-log" id="wad-log">
+                <div class="log-col">
+                  <div class="log-head">choices made <span class="head-num" id="wad-log-choices-num">0</span></div>
+                  <div class="log-list" id="wad-log-choices">
+                    <div class="log-empty">a life hasn't started yet.</div>
+                  </div>
+                </div>
+                <div class="log-col">
+                  <div class="log-head">standing factors <span class="head-num" id="wad-log-factors-num">0</span></div>
+                  <div class="log-list" id="wad-log-factors">
+                    <div class="log-empty">none yet.</div>
+                  </div>
+                </div>
+                <div class="log-col">
+                  <div class="log-head">conditions <span class="head-num" id="wad-log-cond-num">0</span></div>
+                  <div class="log-list" id="wad-log-conditions">
+                    <div class="log-empty">none yet.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legend-row">
+                <div class="legend-item"><span class="swatch marble"></span>marble · you, in life</div>
+                <div class="legend-item"><span class="swatch healthy"></span>healthy aging</div>
+                <div class="legend-item"><span class="swatch mild"></span>mild chronic</div>
+                <div class="legend-item"><span class="swatch severe"></span>severe outcome</div>
+                <div class="actions">
+                  <button id="wad-restart">↺ restart life</button>
+                  <button id="wad-end-now">end summary →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="waddington-foot">
+            <span>EDU · NOT MEDICAL ADVICE</span>
+            <span class="disclaimer">Effect directions are drawn from population-level epidemiology and shown for intuition, not prediction. No real life — yours or anyone's — fits inside a marble.</span>
+            <span>v · 0.1 · MMXXVI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREADS -->
+  <section id="threads">
+    <div class="wrap">
+      <div class="grid12">
+        <div class="section-head reveal">
+          <div class="num">§ 03 / <span class="of">05</span></div>
+          <h2>Threads I keep <em>pulling on</em>.</h2>
+          <div class="meta">
+            FIG. 03·a–d<br>
+            n = 4
+          </div>
+        </div>
+
+        <div class="threads reveal">
+          <div class="thread">
+            <div>
+              <div class="roman">No. I — FIG. 03·a</div>
+              <h3>[First thread, phrased as a <em>question</em> rather than a field]</h3>
+              <p>[Two or three lines on what you find interesting here, and what you have been reading or noticing inside this thread.]</p>
+              <div class="keys">[keyword] · [keyword] · [keyword]</div>
+            </div>
+            <div class="specimen"><canvas data-spec="grid"></canvas></div>
+          </div>
+          <div class="thread">
+            <div>
+              <div class="roman">No. II — FIG. 03·b</div>
+              <h3>[Second thread, in the same <em>register</em>]</h3>
+              <p>[Description as you would tell a friend in a different department why you find this interesting.]</p>
+              <div class="keys">[keyword] · [keyword]</div>
+            </div>
+            <div class="specimen"><canvas data-spec="circles"></canvas></div>
+          </div>
+          <div class="thread">
+            <div>
+              <div class="roman">No. III — FIG. 03·c</div>
+              <h3>[Third thread, or a <em>methodological</em> preoccupation]</h3>
+              <p>[A short paragraph. It is fine if this thread feels exploratory or unresolved — that is more honest than a tidy summary.]</p>
+              <div class="keys">[keyword] · [keyword] · [keyword]</div>
+            </div>
+            <div class="specimen"><canvas data-spec="wave"></canvas></div>
+          </div>
+          <div class="thread">
+            <div>
+              <div class="roman">No. IV — FIG. 03·d</div>
+              <h3>[Fourth thread, or a <em>side project</em>]</h3>
+              <p>[Anything that genuinely lives next to your dissertation. A reading group, a translation, a small dataset.]</p>
+              <div class="keys">[keyword] · [keyword]</div>
+            </div>
+            <div class="specimen"><canvas data-spec="recur"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TALKS -->
+  <section id="talks">
+    <div class="wrap">
+      <div class="grid12">
+        <div class="section-head reveal">
+          <div class="num">§ 04 / <span class="of">05</span></div>
+          <h2>Recent <em>talks &amp; posters</em>.</h2>
+          <div class="meta">
+            FIG. 04 — events<br>
+            past 18 months
+          </div>
+        </div>
+
+        <div class="talks reveal">
+          <div class="talks-list">
+
+            <div class="talk">
+              <div class="when">SPR · MMXXVI</div>
+              <div class="what"><span class="kind">talk</span> <em>"[Title of your talk or paper]"</em></div>
+              <div class="where">[Conference — City]</div>
+            </div>
+
+            <div class="talk">
+              <div class="when">WIN · MMXXVI</div>
+              <div class="what"><span class="kind poster">poster</span> <em>"[Poster title]"</em></div>
+              <div class="where">[Conference — City]</div>
+            </div>
+
+            <div class="talk">
+              <div class="when">AUT · MMXXV</div>
+              <div class="what"><span class="kind invited">invited</span> <em>"[Title of an invited seminar]"</em></div>
+              <div class="where">[Host institution / lab]</div>
+            </div>
+
+            <div class="talk">
+              <div class="when">SUM · MMXXV</div>
+              <div class="what"><span class="kind">talk</span> <em>"[Title]"</em></div>
+              <div class="where">[Summer school — City]</div>
+            </div>
+
+            <div class="talk">
+              <div class="when">SPR · MMXXV</div>
+              <div class="what"><span class="kind poster">poster</span> <em>"[Earlier poster title]"</em></div>
+              <div class="where">[Conference — City]</div>
+            </div>
+
+          </div>
+        </div>
+
+        <aside class="stats reveal">
+          <div class="stats-frame">
+            <h4>SUMMARY · 18 mo</h4>
+            <div class="stat"><span class="lab">Talks</span><span class="num">[3]</span></div>
+            <div class="stat"><span class="lab">Posters</span><span class="num">[2]</span></div>
+            <div class="stat"><span class="lab">Invited</span><span class="num">[1]</span></div>
+            <div class="stat"><span class="lab">Co-authors</span><span class="num">[5]</span></div>
+            <div class="stat"><span class="lab">Cities</span><span class="num">[4]</span></div>
+          </div>
+        </aside>
+
+        <!-- LEDGER -->
+        <div class="ledger-block reveal">
+          <div class="ledger">
+            <span class="tag mono">FIG. 04·a — IN PROGRESS</span>
+            <h4>Drafts &amp; submissions</h4>
+            <div class="sub">on the desk this season</div>
+            <ul>
+              <li><span class="marker">draft</span><span><em>[Working paper title]</em> — [one-line description, with co-authors if any]</span></li>
+              <li><span class="marker">submitted</span><span><em>[Title]</em> — under review at [outlet, anonymous if needed]</span></li>
+              <li><span class="marker">writing</span><span><em>[Chapter or article in progress]</em> — [what it is about, in one line]</span></li>
+            </ul>
+          </div>
+          <div class="ledger">
+            <span class="tag mono">FIG. 04·b — READING</span>
+            <h4>Currently reading</h4>
+            <div class="sub">books, papers, sources, asides</div>
+            <ul>
+              <li><span class="marker">book</span><span>[Author], <em>[Book title]</em></span></li>
+              <li><span class="marker">paper</span><span>[Author et al.], <em>"[paper title]"</em>, [Journal, year]</span></li>
+              <li><span class="marker">archive</span><span>[Collection or dataset you are working through]</span></li>
+              <li><span class="marker">aside</span><span>[Anything outside the field — a novel, an essay, a podcast]</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="grid12">
+        <div class="section-head reveal">
+          <div class="num">§ 05 / <span class="of">05</span></div>
+          <h2>If our questions <em>overlap</em>.</h2>
+          <div class="meta">
+            FIG. 05 — correspondence<br>
+            channel: low-bandwidth
+          </div>
+        </div>
+
+        <div class="closing reveal">
+          <div class="closing-grid">
+            <div>
+              <div class="pre">— say hello —</div>
+              <h2>Write to me, even just to <em>compare notes</em>.</h2>
+              <p class="invite">
+                [A short, sincere paragraph. Who you would love to hear from — fellow doctoral students, scholars working on related questions, archivists, journalists, or curious readers. Tell them what kind of note tends to reach you, and roughly how quickly you reply.]
+              </p>
+              <a class="btn" href="mailto:[your.email@institution.edu]">compose <span class="arrow">→</span></a>
+            </div>
+            <div class="channels">
+              <a href="mailto:[your.email@institution.edu]">
+                <span class="k">email</span><span class="v">[your.email]</span><span class="arr">→</span>
+              </a>
+              <a href="#">
+                <span class="k">orcid</span><span class="v">[0000-0000-0000-0000]</span><span class="arr">→</span>
+              </a>
+              <a href="#">
+                <span class="k">scholar</span><span class="v">[Google Scholar]</span><span class="arr">→</span>
+              </a>
+              <a href="#">
+                <span class="k">elsewhere</span><span class="v">[Bluesky · Mastodon]</span><span class="arr">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div>© [YEAR] [YOUR FULL NAME] · set in INTER &amp; JETBRAINS MONO</div>
+    <div>last revised <span style="color: var(--gold);">[MON. MMXXVI]</span></div>
+  </footer>
+
+</main>
+
+<script>
+  // ---------- reveal ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---------- shared canvas helpers ----------
+  function setupCanvas(canvas) {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    return { ctx, w: rect.width, h: rect.height };
+  }
+
+  const INK = '#1A1612';
+  const GOLD = '#BE9748';
+  const EMERALD = '#1E4D3E';
+  const BURGUNDY = '#6E1F22';
+
+  // ---------- HERO: Lissajous live ----------
+  (function lissajous() {
+    const canvas = document.getElementById('lissajous');
+    if (!canvas) return;
+    let { ctx, w, h } = setupCanvas(canvas);
+    let mouse = { x: 0.5, y: 0.5 };
+    const wrap = canvas.parentElement;
+    wrap.addEventListener('mousemove', (e) => {
+      const r = wrap.getBoundingClientRect();
+      mouse.x = (e.clientX - r.left) / r.width;
+      mouse.y = (e.clientY - r.top) / r.height;
+    });
+    wrap.addEventListener('mouseleave', () => { mouse.x = 0.5; mouse.y = 0.5; });
+
+    let t0 = performance.now();
+    const readout = document.getElementById('param-readout');
+
+    function frame(t) {
+      const dt = (t - t0) / 1000;
+      ({ ctx, w, h } = setupCanvas(canvas));
+      ctx.clearRect(0, 0, w, h);
+
+      // grid
+      ctx.strokeStyle = 'rgba(26,22,18,0.06)';
+      ctx.lineWidth = 1;
+      const step = w / 12;
+      for (let i = 1; i < 12; i++) {
+        ctx.beginPath(); ctx.moveTo(i * step, 0); ctx.lineTo(i * step, h); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, i * step); ctx.lineTo(w, i * step); ctx.stroke();
+      }
+
+      // params from mouse
+      const a = 2 + Math.round(mouse.x * 5);   // 2..7
+      const b = 2 + Math.round(mouse.y * 5);   // 2..7
+      const delta = dt * 0.4;
+
+      // curve
+      ctx.strokeStyle = INK;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      const pad = w * 0.12;
+      const A = (w - pad * 2) / 2;
+      const B = (h - pad * 2) / 2;
+      const cx = w / 2, cy = h / 2;
+      const N = 600;
+      for (let i = 0; i <= N; i++) {
+        const u = (i / N) * Math.PI * 2;
+        const x = cx + A * Math.sin(a * u + delta);
+        const y = cy + B * Math.sin(b * u);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // axis dots
+      ctx.fillStyle = GOLD;
+      ctx.beginPath(); ctx.arc(cx, cy, 2.5, 0, Math.PI * 2); ctx.fill();
+
+      if (readout) readout.textContent = `a:${a}  b:${b}  δ:${delta.toFixed(2)}`;
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    window.addEventListener('resize', () => { ({ ctx, w, h } = setupCanvas(canvas)); });
+  })();
+
+  // ---------- DISSERTATION: Waddington epigenetic landscape ----------

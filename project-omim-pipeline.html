@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OMIM discovery pipeline — Niel Vanhamel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Crimson+Pro:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project-shared.css">
+<style>
+  main.proj.omim-proj { max-width: 980px; }
+  .phase-block {
+    margin: 56px 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+  }
+  .phase-block .phase-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .phase-block h2 {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--ink);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .phase-block h2 em { color: var(--burgundy); font-style: italic; }
+  .phase-block p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .phase-block p em { color: var(--ink); font-style: italic; font-family: 'Instrument Serif', serif; }
+  .phase-block .phase-fig {
+    position: relative;
+    margin-top: 28px;
+    border: 1px solid var(--rule-strong);
+    background: var(--paper-soft);
+    height: 380px;
+    overflow: hidden;
+  }
+  .phase-block .phase-fig canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .phase-block .phase-fig .fig-header {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .phase-block .phase-fig .fig-readout {
+    position: absolute;
+    bottom: 6px; left: 12px; right: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    pointer-events: none;
+  }
+  @media (max-width: 720px) {
+    .phase-block .phase-fig { height: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="proj-nav">
+  <a href="index.html">← back · n. vanhamel · the epylisian genome</a>
+  <span>project · IV of IV</span>
+</nav>
+
+<main class="proj omim-proj">
+
+  <header class="proj-head">
+    <div class="kicker">PROJECT · IV — FIG. P4</div>
+    <h1>The <em>OMIM</em> discovery pipeline.</h1>
+    <div class="subtitle">A three-phase agentic system that proposes a candidate gene <em>and</em> a candidate mechanism for diseases whose mechanism is still unknown.</div>
+  </header>
+
+  <article class="proj-prose">
+    <div class="abstract-label">— abstract —</div>
+    <p>The Online Mendelian Inheritance in Man database lists thousands of distinct phenotypes, and a meaningful share — several hundred — are flagged with the same uncomfortable annotation: phenotype real, gene unknown, mechanism unknown. These are diseases whose existence has been documented well enough to earn an OMIM number, but for which the underlying causal locus has never been mapped. Each unsolved entry is, in effect, a research prompt and a question of how much can be done with what is already public. The pipeline below answers in three phases — computational scoring, deep investigation, mechanism evaluation — each rendered as its own live panel beside the explanation.</p>
+  </article>
+
+  <section class="phase-block">
+    <div class="phase-kicker">PHASE I — FIG. P4·a</div>
+    <h2>Computational scoring on a 1.8M-node graph.</h2>
+    <p>A biomedical knowledge graph of roughly 1.8 million genomic elements — protein-coding genes, enhancers, lncRNAs, miRNAs — connected by ~10.6 million biological edges (regulatory, physical, co-expression, mouse-orthology) is queried with the disease's HPO phenotype terms. The phenotypes are bridged through mouse-knockout ontologies to a set of seed genes, and <em>Personalized PageRank</em> from those seeds spreads probability outward through the graph as traveling flows of evidence. Pulsing seed nodes emit particles along edges; targets that accumulate weight emerge as Tier 1 (top 50) and Tier 2 (top 200) ranked candidates.</p>
+    <div class="phase-fig">
+      <div class="fig-header">
+        <span>FIG. P4·a · PHASE I</span>
+        <span>KNOWLEDGE GRAPH + PERSONALIZED PAGERANK</span>
+      </div>
+      <canvas id="omim-phase1"></canvas>
+      <div class="fig-readout" id="readout-phase1">graph initialising…</div>
+    </div>
+  </section>
+
+  <section class="phase-block">
+    <div class="phase-kicker">PHASE II — FIG. P4·b</div>
+    <h2>An autonomous agent cross-checks each candidate against ten databases.</h2>
+    <p>The Phase I shortlist enters deep investigation. An autonomous biological-reasoning agent subjects each candidate to quantitative cross-checks across ten or more independent data dimensions — gnomAD constraint, GTEx tissue expression, mouse phenotypes, ClinVar, DECIPHER, Hi-C contact, single-cell atlases, conservation scores, GWAS catalog, protein-protein interaction networks. Pseudogenes and weak-signal candidates are rejected outright with a strike-through and a reason badge; the agent also surfaces fresh candidates the graph itself missed entirely, by literature cross-referencing on the phenotype keywords. The strongest survivors — usually three — earn a green "advancing" tint and pass to Phase III.</p>
+    <div class="phase-fig">
+      <div class="fig-header">
+        <span>FIG. P4·b · PHASE II</span>
+        <span>CANDIDATE × DATABASE MATRIX</span>
+      </div>
+      <canvas id="omim-phase2"></canvas>
+      <div class="fig-readout" id="readout-phase2">matrix initialising…</div>
+    </div>
+  </section>
+
+  <section class="phase-block">
+    <div class="phase-kicker">PHASE III — FIG. P4·c</div>
+    <h2>In-silico mechanism evaluation. One winner.</h2>
+    <p>The three finalists from Phase II are each tested against six competing mechanism hypotheses — <em>loss-of-function, gain-of-function, dominant-negative, haploinsufficiency, splicing defect, regulatory disruption</em> — through structural prediction, expression-pattern simulation, dosage modelling and known-variant comparison. The (gene, mechanism) pair with the highest combined evidence becomes the discovery report, alongside an experimental roadmap proposing the assays that would confirm or kill the hypothesis. The animation cycles through three test diseases — Pitt-Hopkins-like → TBR1 · haploinsufficiency, STALE → EHMT1 · loss-of-function, Coffin-Siris-like → BICRA · dominant-negative.</p>
+    <div class="phase-fig">
+      <div class="fig-header">
+        <span>FIG. P4·c · PHASE III</span>
+        <span>FINALIST × MECHANISM EVALUATION</span>
+      </div>
+      <canvas id="omim-phase3"></canvas>
+      <div class="fig-readout" id="readout-phase3">finalists initialising…</div>
+    </div>
+  </section>
+
+  <article class="proj-prose">
+    <div class="closer">status · working prototype · three test diseases &nbsp;|&nbsp; stack · python · neo4j · agentic LLM cross-checks</div>
+  </article>
+
+</main>
+
+<footer class="proj-foot">
+  <div>© MMXXVI Niel Vanhamel · Ghent University</div>
+  <div>FIG. P4 · last revised APR · MMXXVI</div>
+</footer>
+
+<script src="project-shared.js"></script>
+<script src="iife_e_phase1.js"></script>
+<script src="iife_e_phase2.js"></script>
+<script src="iife_e_phase3.js"></script>
+</body>
+</html>

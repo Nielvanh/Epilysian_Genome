@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dissecting the epigenetic clocks — Niel Vanhamel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project-shared.css">
+</head>
+<body>
+
+<nav class="proj-nav">
+  <a href="index.html">← back · n. vanhamel · the epylisian genome</a>
+  <span>project · I of IV</span>
+</nav>
+
+<main class="proj">
+
+  <header class="proj-head">
+    <div class="kicker">PROJECT · I — FIG. P1</div>
+    <h1>Dissecting the <em>epigenetic clocks</em>.</h1>
+    <div class="subtitle">What, exactly, are Horvath, Hannum, PhenoAge and GrimAge measuring — and where do they disagree?</div>
+  </header>
+
+  <div class="proj-fig">
+    <div class="fig-header">
+      <span>FIG. P1 · DRAFT · D</span>
+      <span>FOUR DNAm CLOCKS · LIVE PREDICTION DIAL</span>
+    </div>
+    <canvas id="draft-d"></canvas>
+    <div class="fig-readout" id="readout-d">clocks initialising…</div>
+  </div>
+
+  <article class="proj-prose">
+    <div class="abstract-label">— abstract —</div>
+    <p>The first DNA-methylation clocks landed almost as a curiosity — take a few hundred CpG sites whose methylation level shifts cleanly with age, fit a regression, and chronological age can be predicted from a blood sample within two or three years. Horvath's prototype trained across fifty-one tissue types; Hannum followed; PhenoAge and GrimAge later pivoted from chronological age toward mortality risk and gait speed, predicting outcomes the original clocks were never designed to see. The surprise is that they work at all. The problem is that they all work <em>differently</em>: two clocks can give the same chronological age and disagree by ten biological years on the same sample, and whatever each is measuring, it isn't quite the thing the others are.</p>
+    <p>This project takes the four clocks apart at the level of their CpG sets and their regression coefficients, asks where they overlap and where they're orthogonal, and re-trains each on a common reference cohort so coefficient differences stop reflecting training-set composition. The probes that follow ask scanpy-style questions of the resulting design matrix — clustering, dimensionality reduction, enrichment against ENCODE chromatin states and Reactome pathways — and finally test the disentangled clocks against a held-out centenarian cohort and a longitudinal cohort that no clock has yet seen. The aim is to turn the clocks from black-box dials into legible instruments, since aging-intervention trials and clinical translations are already running on top of them, and knowing what the dials actually count is no longer a niche question.</p>
+    <div class="closer">datasets · GEO · UK Biobank methylation · NE centenarian sample &nbsp;|&nbsp; stack · python · scikit-learn · methylprep · scanpy · jax &nbsp;|&nbsp; status · year 1 · month 4</div>
+  </article>
+
+</main>
+
+<footer class="proj-foot">
+  <div>© MMXXVI Niel Vanhamel · Ghent University</div>
+  <div>FIG. P1 · last revised APR · MMXXVI</div>
+</footer>
+
+<script src="project-shared.js"></script>
+<script src="iife_d.js"></script>
+</body>
+</html>

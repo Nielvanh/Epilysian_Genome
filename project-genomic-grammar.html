@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unsupervised genomic grammar model — Niel Vanhamel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="project-shared.css">
+</head>
+<body>
+
+<nav class="proj-nav">
+  <a href="index.html">← back · n. vanhamel · the epylisian genome</a>
+  <span>project · III of IV</span>
+</nav>
+
+<main class="proj">
+
+  <header class="proj-head">
+    <div class="kicker">PROJECT · III — FIG. P3</div>
+    <h1>An unsupervised model of <em>genomic grammar</em>.</h1>
+    <div class="subtitle">If a language model can recover syntax from text without ever being told the rules, what does the same machinery learn from raw genome?</div>
+  </header>
+
+  <div class="proj-fig-placeholder">
+    <div class="ph-rule"></div>
+    <div class="ph-text mono">FIG. P3 · pending — visualisation will follow once trained-model probes return interpretable structure</div>
+    <div class="ph-rule"></div>
+  </div>
+
+  <article class="proj-prose">
+    <div class="abstract-label">— abstract —</div>
+    <p>Promoters, enhancers, splice sites, transcription-factor motifs, methylation context — biology has a grammar, and it has been pieced together over decades by experiments that each ask one question at a time. Modern self-supervised models suggest a different angle. Hand the architecture enough raw genomic sequence and let it discover the rules itself, the way large language models discover syntax without ever being shown a grammar book. The premise is that a model trained well on genome will surface regulatory logic as a side-effect of learning to predict masked nucleotides, and that the resulting embeddings will carry information that hand-engineered features simply do not.</p>
+    <p>The plan is to pre-train a transformer or a state-space model on the human reference plus a handful of vertebrate genomes, with masked-token and next-token objectives, feeding it not only the four bases but also CpG context — which sites are methylated in which tissues, and the local sequence environment around each. The interesting work begins after training: probe the learned representations for biology that was never named in the loss. Do attention heads localise on canonical TF motifs? Do hidden states cluster regulatory regions by chromatin state? Does the model spontaneously distinguish promoters from enhancers when neither concept appeared anywhere in training? The deliverable, in the first year, is an architecture comparison — transformer versus Mamba versus Hyena on a fixed pretraining budget — measured against probe tasks that test motif recovery, conservation prediction and methylation-state inference. The substrate that emerges feeds the rest of the dissertation.</p>
+    <div class="closer">status · architecture sketches, no weights yet &nbsp;|&nbsp; probes · TF motifs · chromatin state · methylation context</div>
+  </article>
+
+</main>
+
+<footer class="proj-foot">
+  <div>© MMXXVI Niel Vanhamel · Ghent University</div>
+  <div>FIG. P3 · last revised APR · MMXXVI</div>
+</footer>
+
+<script src="project-shared.js"></script>
+</body>
+</html>
