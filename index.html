@@ -154,6 +154,7 @@
     line-height: 1.1;
     letter-spacing: -0.025em;
     max-width: 24ch;
+    transform: translateX(2cm);
   }
   .section-head h2 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--emerald); }
   .section-head .meta {
@@ -967,35 +968,64 @@
   @media (max-width: 720px) { .ledger-block { grid-template-columns: 1fr; } }
 
   /* ---------- CLOSING ---------- */
-  .closing { grid-column: 1 / 13; padding-top: 80px; padding-bottom: 80px; text-align: left; }
-  .closing-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: end; }
-  .closing .pre {
+  .closing {
+    grid-column: 1 / 13;
+    padding-top: 100px;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+  .closing-overline {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .closing-overline .num {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
     color: var(--gold);
-    letter-spacing: 0.1em;
-    margin-bottom: 24px;
-    text-transform: uppercase;
+    white-space: nowrap;
   }
-  .closing h2 {
+  .closing-overline .num .of { color: var(--ink-faint); }
+  .closing-overline .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule-strong);
+  }
+  .closing-title {
     font-weight: 500;
-    font-size: clamp(40px, 6vw, 80px);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
-    margin-bottom: 28px;
-    max-width: 16ch;
+    font-size: clamp(32px, 4.5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    max-width: 22ch;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .closing h2 em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--emerald); letter-spacing: -0.01em; }
+  .closing-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--emerald); letter-spacing: -0.01em; }
   .closing .invite {
     font-size: 17px;
     color: var(--ink-soft);
     max-width: 56ch;
     margin-bottom: 36px;
+    line-height: 1.65;
+    text-align: left;
   }
+  .closing-bottom {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+    align-items: start;
+    width: 100%;
+  }
+  .closing-left { text-align: left; display: flex; flex-direction: column; align-items: center; }
+  .closing-left .btn { transform: translateX(-1.5cm); }
   .channels {
     display: grid;
     grid-template-columns: 1fr;
     border-top: 1px solid var(--ink);
+    width: 100%;
   }
   .channels a {
     display: grid;
@@ -1023,6 +1053,7 @@
     color: var(--gold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    text-align: left;
   }
   .channels .v {
     font-family: 'Instrument Serif', serif;
@@ -1039,7 +1070,9 @@
   }
   .channels a:hover .arr { transform: translateX(4px); color: var(--gold); }
   @media (max-width: 900px) {
-    .closing-grid { grid-template-columns: 1fr; gap: 32px; }
+    .closing-bottom { grid-template-columns: 1fr; gap: 32px; }
+    .closing-left { text-align: center; }
+    .closing-left .btn { display: inline-flex; }
   }
 
   footer.foot {
@@ -1084,6 +1117,7 @@
     max-width: 36ch;
     text-align: center;
     justify-self: center;
+    transform: translateX(-1cm);
   }
   .waddington-head .head-meta {
     font-family: 'JetBrains Mono', monospace;
@@ -1691,7 +1725,7 @@
     text-transform: uppercase;
     margin-top: 14px;
   }
-  .waddington-foot .disclaimer { max-width: 60ch; text-transform: none; letter-spacing: 0.02em; font-size: 11px; color: var(--ink-soft); }
+  .waddington-foot .disclaimer { max-width: 90ch; text-transform: none; letter-spacing: 0.02em; font-size: 11px; color: var(--ink-soft); text-align: center; transform: translateX(-1cm); }
 
   @media (max-width: 1100px) {
     .factor-categories { grid-template-columns: repeat(3, 1fr); }
@@ -1752,7 +1786,6 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="label-tl"><span class="dot"></span><span class="mono">FIG. 00 — INTRO</span></div>
     <div class="label-tr mono">SCROLL <span style="color:var(--gold)">↓</span></div>
 
     <div class="wrap">
@@ -2053,7 +2086,7 @@
       <div class="grid12">
         <div class="section-head reveal">
           <div class="num">§ 03 / <span class="of">04</span></div>
-          <h2>Current <em>projects</em>.</h2>
+          <h2 style="transform: translateX(5.5cm)">Current <em>projects</em>.</h2>
           <div class="meta">
             FIG. 03·a–d<br>
             n = 4
@@ -2118,16 +2151,14 @@
   <section id="contact">
     <div class="wrap">
       <div class="grid12">
-        <div class="section-head reveal">
-          <div class="num">§ 04 / <span class="of">04</span></div>
-          <h2>If our questions <em>overlap</em>.</h2>
-        </div>
-
         <div class="closing reveal">
-          <div class="closing-grid">
-            <div>
-              <div class="pre">— say hello —</div>
-              <h2>Write to me, even just to <em>compare notes</em>.</h2>
+          <div class="closing-overline">
+            <span class="num">§ 04 / <span class="of">04</span></span>
+            <span class="rule"></span>
+          </div>
+          <h2 class="closing-title">If our questions <em>overlap</em> —<br>write to me, even just to <em>compare notes</em>.</h2>
+          <div class="closing-bottom">
+            <div class="closing-left">
               <p class="invite">
                 A note is welcome from anyone working at the seam between aging biology, machine learning and modeling — fellow doctoral students, biologists curious about modern AI, modelers curious about biology, clinicians, or readers who simply find the question pulls at them.
               </p>
